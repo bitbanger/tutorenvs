@@ -108,6 +108,10 @@ class OvercookedTutorEnv:
         return state
 
     def apply_sai(self, s, a, i):
+        # Block and wait for a state update
+        self.update_state()
+
+        # Send the SAI and fake a reward
         self.publish_sai(s, a, i)
         reward = 1.0
         return reward
