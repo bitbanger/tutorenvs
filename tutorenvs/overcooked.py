@@ -81,7 +81,7 @@ class OvercookedTutorEnv:
     # game environment. This does not block the
     # HTN loop thread.
     def publish_sai(self, s, a, i):
-        print('sending action %s' % a)
+        # print('sending action %s' % a)
         self.sai_queue_w.send((s, a, i))
 
     # Wait for a new state on the in-queue and
@@ -90,9 +90,9 @@ class OvercookedTutorEnv:
         state_channels, _, _ = select([self.state_queue_r], [], [])
         self.state_lock.acquire()
         try:
-            # self.state = state_channels[0].recv()
-            state_channels[0].recv()
-            self.state = {}
+            self.state = state_channels[0].recv()
+            # state_channels[0].recv()
+            # self.state = {}
         except:
             print('error updating state')
             pass
